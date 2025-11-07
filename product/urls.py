@@ -1,15 +1,18 @@
+
 from django.urls import path
-from . import views
+from .views import (
+    CategoryListCreateAPIView, CategoryRetrieveUpdateDestroyAPIView,
+    ProductListCreateAPIView, ProductRetrieveUpdateDestroyAPIView,
+    ReviewListCreateAPIView, ReviewRetrieveUpdateDestroyAPIView,
+    ProductWithReviewsAPIView
+)
 
 urlpatterns = [
-    path('categories/', views.CategoryListAPIView.as_view()),
-    path('categories/<int:pk>/', views.CategoryDetailAPIView.as_view()),
-    
-    path('products/', views.ProductListAPIView.as_view()),
-    path('products/<int:pk>/', views.ProductDetailAPIView.as_view()),
-
-    path('products/reviews/', views.ProductWithReviewsAPIView.as_view()),
-
-    path('reviews/', views.ReviewListAPIView.as_view()),
-    path('reviews/<int:pk>/', views.ReviewDetailAPIView.as_view()),
+    path('categories/', CategoryListCreateAPIView.as_view(), name='category-list-create'),
+    path('categories/<int:pk>/', CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-rud'),
+    path('products/', ProductListCreateAPIView.as_view(), name='product-list-create'),
+    path('products/<int:pk>/', ProductRetrieveUpdateDestroyAPIView.as_view(), name='product-rud'),
+    path('products/reviews/', ProductWithReviewsAPIView.as_view(), name='product-reviews'),
+    path('reviews/', ReviewListCreateAPIView.as_view(), name='review-list-create'),
+    path('reviews/<int:pk>/', ReviewRetrieveUpdateDestroyAPIView.as_view(), name='review-rud'),
 ]
